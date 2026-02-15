@@ -11,5 +11,14 @@ def compute_char_counts(file_content):
             char_counts[char] += 1
     return char_counts
 
+def char_probabilities(char_counts):
+    N = sum(char_counts.values())
+    char_probabilities = {}
+    for key, value in char_counts.items():
+        char_probability = value / N
+        char_probabilities[key] = char_probability
+    return char_probabilities
+
 file_content = read_file("sample.txt")
 char_counts = compute_char_counts(file_content)
+probabilities = char_probabilities(char_counts)
