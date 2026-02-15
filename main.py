@@ -25,7 +25,15 @@ def char_informations(char_probabilities):
     informations = {key: log2(1/value) for key, value in char_probabilities.items()}
     return informations
 
+def entropy(informations, probabilities):
+    total_entropy = 0
+    for key in probabilities:
+        total_entropy += probabilities[key] * informations[key]
+    return total_entropy
+
 file_content = read_file("sample.txt")
 char_counts = compute_char_counts(file_content)
 probabilities = char_probabilities(char_counts)
 informations = char_informations(probabilities)
+total_entropy = entropy(informations, probabilities)
+print(f"Entropy: {total_entropy}")
