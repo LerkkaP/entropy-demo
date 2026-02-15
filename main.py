@@ -1,3 +1,5 @@
+from math import log2
+
 def read_file(file_name):
     with open(file_name, "r") as f:
         return f.read()
@@ -19,6 +21,11 @@ def char_probabilities(char_counts):
         char_probabilities[key] = char_probability
     return char_probabilities
 
+def char_informations(char_probabilities):
+    informations = {key: log2(1/value) for key, value in char_probabilities.items()}
+    return informations
+
 file_content = read_file("sample.txt")
 char_counts = compute_char_counts(file_content)
 probabilities = char_probabilities(char_counts)
+informations = char_informations(probabilities)
